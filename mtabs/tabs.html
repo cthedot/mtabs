@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Tabs</title>
+	
+	<link rel="stylesheet" href="mtabs.css">
+	<style>
+		body {
+			font: 1em sans-serif;
+			margin: 0;
+		}
+		.padding {
+			padding: 20px 30px;
+		}
+		code {
+			word-wrap: break-word;
+		}
+		
+		.tabs-headers > * {
+			text-decoration: none;
+			color: #fff;
+			background: #000;
+			border: 2px solid #fff;
+		}
+		.tabs-tabs > * {
+			border-top: 1px solid;
+			border-bottom: 1px solid;
+		}
+	</style>
+
+	<body>
+		<div class="padding">
+			<h1>responsive tabs</h1>
+			<ul>
+				<li>tabs scroll if screen if not wide enough to fit all</li>
+				<li>cursor left/right moves tabs</li>
+				<li>if Hammer is present uses touch too</li>
+				<li>control which tab is shown from script (tabs need id in HTML)</li>
+			</ul>
+		</div>
+	
+		<div class="tabs" id="tabs1">
+			<div class="tabs-headers">
+				<a href="#t1">tab 1</a>
+				<a href="#t2">tab header two</a>
+				<a href="#t3">tab 3</a>
+				<a href="#t3">tab 4 last</a>
+			</div>
+			<div class="tabs-tabs">
+				<section id="t1">
+					<div class="padding">
+						<h2>tab 1</h2>
+						<p>...</p>
+					</div>					
+				</section>
+				<section id="t2">
+					<div class="padding">
+						<h2>tab 2</h2>
+						<p>...</p>
+						<p>...</p>
+						<p>longer content</p>
+					</div>					
+				</section>
+				<section id="t3">
+					<div class="padding">
+						<h2>tab 3</h2>
+						<p>...</p>
+					</div>					
+				</section>
+				<section id="t4">
+					<div class="padding">
+						<h2>tab 4</h2>
+						<p>...</p>
+					</div>					
+				</section>
+			</div>
+		</div>
+
+		<hr>
+		<div class="padding">
+			<h2>init tabs</h2>
+			<p>
+				<code>Tabs.init(document.querySelectorAll('.tabs')[, { moveTabs: true } ])</code>
+				<br>
+				init(elements[,options]), if <code>moveTabs: true</code> tabs will move even if fitting on screen 
+			</p>
+
+			<h2>activate tabs from script</h2>
+			<button onclick="Tabs.activate('tabs1', 0)">show tab 1</button>
+			<button onclick="Tabs.activate('tabs1', 1)">show tab 2</button>
+			<button onclick="Tabs.activate('tabs1', 2)">show tab 3</button>
+			<p>
+				<code>Tabs.activate('tabs1', 0)</code>
+				<br>
+				activate(tabsid, tabno)
+			</p>
+			<h2>Issues</h2>
+			<ul>
+				<li>global <code>Tabs</code> module</li>
+				<li>tab too wide to fit on (small) screen?</li>
+				<li>tab content same height currently</li>
+				<li>make keyboard control optional?</li>
+				<li>hash link does not work?!</li>
+			</ul>
+		</div>
+
+	<script src="mtabs.js"></script>
+	<script>
+		Tabs.init(document.querySelectorAll('.tabs'))
+	</script>
+	</body>
+	
+</html>
