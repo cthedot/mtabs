@@ -6,17 +6,22 @@
   -webkit-flex-direction: column;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
+
+.tabs-headers-box {
+  position: relative;
+}
+
 .tabs-headers {
-  margin-left: 30px;
-  margin-bottom: 1.4em;
+  margin-left: 15px;
   display: -webkit-flex;
   display: flex;
   -webkit-transition: 0.2s -webkit-transform 0.1s;
   transition: 0.2s transform 0.1s;
 }
 
-.tabs-headers > * {
+.tabs-headers > a {
   white-space: pre;
   padding: 0.35em 15px;
   font-weight: normal;
@@ -25,15 +30,40 @@
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-.tabs-headers > *:hover,
-.tabs-headers > *:focus,
-.tabs-0 .tabs-headers > *:nth-child(1),
-.tabs-1 .tabs-headers > *:nth-child(2),
-.tabs-2 .tabs-headers > *:nth-child(3),
-.tabs-3 .tabs-headers > *:nth-child(4),
-.tabs-4 .tabs-headers > *:nth-child(5) {
+.tabs-headers > a:hover,
+.tabs-headers > a:focus,
+.tabs-0 .tabs-headers > a:nth-child(1),
+.tabs-1 .tabs-headers > a:nth-child(2),
+.tabs-2 .tabs-headers > a:nth-child(3),
+.tabs-3 .tabs-headers > a:nth-child(4),
+.tabs-4 .tabs-headers > a:nth-child(5) {
   opacity: 1.0;
 }
+
+.tabs-nav {
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: inherit;
+  background: none;
+  border: none;
+  padding: 0.35em 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.tabs-nav + .tabs-nav {
+  left: auto;
+  right: 0;
+}
+.tabs-nav:disabled {
+  visibility: hidden;
+}
+.tabs-nav:focus,
+.tabs-headers-box:hover > .tabs-nav {
+  opacity: 1;
+}
+
 .tabs-tabs {
   -webkit-transition: 0.25s ease-in-out;
   -webkit-flex-basis: 100%;
@@ -48,23 +78,25 @@
   transform: translateX(0vw);
 }
 .tabs-1 > .tabs-tabs {
-  -webkit-transform: translateX(-100vw);
-  transform: translateX(-100vw);
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
 }
 .tabs-2 > .tabs-tabs {
-  -webkit-transform: translateX(-200vw);
-  transform: translateX(-200vw);
+  -webkit-transform: translateX(-200%);
+  transform: translateX(-200%);
 }
 .tabs-3 > .tabs-tabs {
-  -webkit-transform: translateX(-300vw);
-  transform: translateX(-300vw);
+  -webkit-transform: translateX(-300%);
+  transform: translateX(-300%);
 }
 .tabs-tabs > * {
-  -webkit-flex: 0 0 100vw;
-  flex: 0 0 100vw;
+  -webkit-flex: 0 0 100%;
+  flex: 0 0 100%;
   opacity: 0;
   -webkit-transition: 0.15s opacity 0.15s;
   transition: 0.15s opacity 0.15s;
+  overflow: auto;
+  /* set max-height: ..vh; if needed */
 }
 .tabs-0 > .tabs-tabs > *:nth-child(1),
 .tabs-1 > .tabs-tabs > *:nth-child(2),

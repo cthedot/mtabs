@@ -1,7 +1,7 @@
 ﻿;(function () {
   "use strict";
   /*
-    any tabs element with an id will be saved 
+    any tabs element with an id will be saved
     call ``Tabs.activate(tabs-id, tab-no)`` to activate any tab
   */
 
@@ -12,6 +12,7 @@
     options = options || {}
 
     ;[].forEach.call($elements, function ($element, j) {
+      var $headersBox = $element.querySelector('.tabs-headers-box')
       var $headersContainer = $element.querySelector('.tabs-headers')
       var $headers = $element.querySelectorAll('.tabs-headers > *')
       var max = $headers.length - 1
@@ -20,18 +21,36 @@
       var widthSum = 0
       var availableWidth = window.innerWidth
       var hash = location.hash
-      
+      var $prev = document.createElement('button')
+      var $next = document.createElement('button')
+
+      $prev.classList.add('tabs-nav')
+      $next.classList.add('tabs-nav')
+      $prev.textContent = '<'
+      $next.textContent = '>'
+      $headersBox.appendChild($prev)
+      $headersBox.appendChild($next)
+
+      function setButtonState($button, active) {
+        $button[active ? 'removeAttribute' : 'setAttribute']('disabled', true)
+      }
+
       function activate(n) {
-        var x = (options.moveTabs || availableWidth < widthSum) ?
-          -(widths.slice(0, n).reduce(function (sum, n) {
-            return sum + n
-          }, 0)) : 0
-          
-        $headersContainer.style.transform = 'webkitTranslateX(' + x + 'px)'
-        $headersContainer.style.transform = 'translateX('+ x + 'px)'
-        $element.classList.remove('tabs-' + active)
-        $element.classList.add('tabs-' + n)
-        active = n
+        if (n >= 0 && n <= max) {
+          var x = (options.moveTabs || availableWidth < widthSum) ?
+            -(widths.slice(0, n).reduce(function (sum, n) {
+              return sum + n
+            }, 0)) : 0
+
+          $headersContainer.style.transform = 'webkitTranslateX(' + x + 'px)'
+          $headersContainer.style.transform = 'translateX('+ x + 'px)'
+          $element.classList.remove('tabs-' + active)
+          $element.classList.add('tabs-' + n)
+          active = n
+
+          setButtonState($prev, active != 0)
+          setButtonState($next, active != max)
+        }
       }
 
       ;[].forEach.call($headers, function ($header, i) {
@@ -44,18 +63,18 @@
 
         widthSum += w
         widths.push(w)
-        
+
         $header.addEventListener('click', function (e) {
           e.preventDefault()
           activate(i)
         })
-        
+
         if (hash) {
           if ($header.getAttribute('href') == hash) {
-            active = i            
-          }          
+            active = i
+          }
         }
-        
+
       })
 
       // events
@@ -71,6 +90,14 @@
         });
       }
 
+      $prev.addEventListener('click', function(e) {
+        activate(active - 1)
+      }, false)
+      $next.addEventListener('click', function(e) {
+        activate(active + 1)
+      }, false)
+
+
       window.addEventListener('keydown', function(e) {
         if (e.keyCode == 37 && active > 0) {
           activate(active - 1)
@@ -78,11 +105,11 @@
         if (e.keyCode == 39 && active < max) {
           activate(active + 1)
         }
-      }, false) 
+      }, false)
 
       window.addEventListener('resize', function(e) {
         availableWidth = window.innerWidth
-      }, false) 
+      }, false)
 
 
       // to be able to control from script
@@ -93,7 +120,7 @@
           activate: activate
         }
       }
-      
+
       activate(0)
     })
   }
@@ -107,7 +134,7 @@
   window.Tabs = {
     init: init,
     activate: activate,
-    VERSION: 0.2
+    VERSION: 0.3
   }
 
 }());

@@ -6,30 +6,46 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>Tabs</title>
-	
+
 	<link rel="stylesheet" href="mtabs.css">
 	<style>
 		body {
 			font: 1em sans-serif;
 			margin: 0;
 		}
+
+    .partwidth {
+      background: #eee;
+      width: 80%;
+      border: 1px solid;
+      margin: 1em auto;
+    }
+
 		.padding {
-			padding: 20px 30px;
+			padding: 20px 15px;
 		}
 		code {
 			word-wrap: break-word;
 		}
-		
-		.tabs-headers > * {
+
+    .tabs > button {
+      background: rgba(255, 255, 255, 0.8);
+      border: 2px solid #fff;
+    }
+		.tabs-headers > a {
 			text-decoration: none;
 			color: #fff;
 			background: #000;
 			border: 2px solid #fff;
 		}
-		.tabs-tabs > * {
+		.tabs-tabs > a {
 			border-top: 1px solid;
 			border-bottom: 1px solid;
 		}
+
+    .tabs-tabs > * {
+      max-height: 80vh;
+    }
 	</style>
 
 	<body>
@@ -42,20 +58,23 @@
 				<li>control which tab is shown from script (tabs need id in HTML)</li>
 			</ul>
 		</div>
-	
+
+    <h2 class="padding">Full width tabs</h2>
 		<div class="tabs" id="tabs1">
-			<div class="tabs-headers">
-				<a href="#t1">tab 1</a>
-				<a href="#t2">tab header two</a>
-				<a href="#t3">tab 3</a>
-				<a href="#t3">tab 4 last</a>
-			</div>
+      <div class="tabs-headers-box">
+        <div class="tabs-headers">
+          <a href="#t1">tab 1</a>
+          <a href="#t2">tab header two</a>
+          <a href="#t3">tab 3</a>
+          <a href="#t3">tab 4 last</a>
+        </div>
+      </div>
 			<div class="tabs-tabs">
 				<section id="t1">
 					<div class="padding">
 						<h2>tab 1</h2>
 						<p>...</p>
-					</div>					
+					</div>
 				</section>
 				<section id="t2">
 					<div class="padding">
@@ -63,19 +82,30 @@
 						<p>...</p>
 						<p>...</p>
 						<p>longer content</p>
-					</div>					
+            <p>longer content</p>
+            <p>longer content</p>
+            <p>longer content</p>
+            <p>longer content</p>
+            <p>longer content</p>
+            <p>longer content</p>
+            <p>longer content</p>
+            <p>longer content</p>
+            <p>longer content</p>
+            <p>longer content</p>
+            <p>longer content</p>
+					</div>
 				</section>
 				<section id="t3">
 					<div class="padding">
 						<h2>tab 3</h2>
 						<p>...</p>
-					</div>					
+					</div>
 				</section>
 				<section id="t4">
 					<div class="padding">
 						<h2>tab 4</h2>
 						<p>...</p>
-					</div>					
+					</div>
 				</section>
 			</div>
 		</div>
@@ -86,7 +116,7 @@
 			<p>
 				<code>Tabs.init(document.querySelectorAll('.tabs')[, { moveTabs: true } ])</code>
 				<br>
-				init(elements[,options]), if <code>moveTabs: true</code> tabs will move even if fitting on screen 
+				init(elements[,options]), if <code>moveTabs: true</code> tabs will move even if fitting on screen
 			</p>
 
 			<h2>activate tabs from script</h2>
@@ -101,17 +131,69 @@
 			<h2>Issues</h2>
 			<ul>
 				<li>global <code>Tabs</code> module</li>
-				<li>tab too wide to fit on (small) screen?</li>
 				<li>tab content same height currently</li>
 				<li>make keyboard control optional?</li>
 				<li>hash link does not work?!</li>
 			</ul>
 		</div>
 
+    <section class="partwidth">
+      <h2 class="padding">Part width tabs</h2>
+      <div class="tabs" id="tabs2">
+        <div class="tabs-headers-box">
+          <div class="tabs-headers">
+            <a href="#t1">tab 1</a>
+            <a href="#t2">tab header two</a>
+            <a href="#t3">tab 3</a>
+            <a href="#t3">tab 4 last</a>
+          </div>
+        </div>
+        <div class="tabs-tabs">
+          <section id="t1">
+            <div class="padding">
+              <h2>tab 1</h2>
+              <p>...</p>
+            </div>
+          </section>
+          <section id="t2">
+            <div class="padding">
+              <h2>tab 2</h2>
+              <p>...</p>
+              <p>...</p>
+              <p>longer content</p>
+              <p>longer content</p>
+              <p>longer content</p>
+              <p>longer content</p>
+              <p>longer content</p>
+              <p>longer content</p>
+              <p>longer content</p>
+              <p>longer content</p>
+              <p>longer content</p>
+              <p>longer content</p>
+              <p>longer content</p>
+              <p>longer content</p>
+            </div>
+          </section>
+          <section id="t3">
+            <div class="padding">
+              <h2>tab 3</h2>
+              <p>...</p>
+            </div>
+          </section>
+          <section id="t4">
+            <div class="padding">
+              <h2>tab 4</h2>
+              <p>...</p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
 	<script src="mtabs.js"></script>
 	<script>
 		Tabs.init(document.querySelectorAll('.tabs'))
 	</script>
 	</body>
-	
+
 </html>
