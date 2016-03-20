@@ -1,7 +1,7 @@
 # mtabs
 responsive Tabs
 
-see tabs.html demo for API info
+see tabs.html or the [demo](http://cthedot.de/mtabs/ "demo") for API info
 
 v0.3
 - generated HTML updated (additional tabs-headers wrapper and nav buttons)
